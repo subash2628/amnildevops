@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL Query Executor</title>
+</head>
+<body>
+    <h1>MySQL Query Executor</h1>
+    <label for="queryInput">Enter MySQL Query:</label>
+    <input type="text" id="queryInput">
+    <button onclick="executeQuery()">Execute</button>
+    
+    <div id="result" style="color: green;"></div>
+    <div id="error" style="color: red;"></div>
+
+    <script>
+        function executeQuery() {
+            var query = document.getElementById('queryInput').value;
+
+            // Send the query to the server
+            fetch(`/run-mysql-command?command=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the result in green
+                    document.getElementById('result').style.color = 'green';
+                    document.getElementById('error').style.color = 'black';
+                    document.getElementById('result').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    // Display the error in red
+                    document.getElementById('result').style.color = 'black';
+                    document.getElementById('error').style.color = 'red';
+                    document.getElementById('error').innerText = 'Error: ' + error.message;
+                });
+        }
+    </script>
+</body>
+</html>
