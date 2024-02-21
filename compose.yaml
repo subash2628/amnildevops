@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  node-app:
+    #image: my-node-app:1.2
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8456:8000
+    volumes:
+      - node-app-data:/app/storage
+    restart: always
+    environment:
+      NAME: sharma
+      MYSQL_PORT: 3306
+      HOST_NAME: database
+      HOST_IP_ADDRESS: 192.168.2.108
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: db_test
+      MYSQL_USER: subash
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: admin@123
+
+volumes:
+  node-app-data:
