@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
   node-app:
-    #image: my-node-app:1.2
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: my-node-app:1.2
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile
     ports:
       - 8456:8000
     volumes:
