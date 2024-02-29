@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   node-app:
-    image: my-node-app:1.6
+    image: subash26288/my-node-app:1.0
     #build:
     #  context: .
     #  dockerfile: Dockerfile
